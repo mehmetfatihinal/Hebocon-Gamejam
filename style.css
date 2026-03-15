@@ -1,0 +1,456 @@
+/* CSS Reset and Base styling */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  /* Hide scrollbars for full screen 3D */
+  background-color: #1a1a2e;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  user-select: none;
+}
+
+/* 3D Container */
+#gameContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+}
+
+/* UI Overlay */
+#ui-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+  /* Let clicks pass through except on interactive elements */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+/* Header & Typography */
+#header {
+  text-align: left;
+  pointer-events: auto;
+}
+
+h1 {
+  margin: 0;
+  color: #e94560;
+  font-size: 32px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #f39c12;
+  vertical-align: middle;
+}
+
+/* Stats Panel (Top Right) */
+#stats-panel {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 15px;
+  pointer-events: auto;
+}
+
+.stat-box,
+.player-stat {
+  background: rgba(22, 33, 62, 0.85);
+  border: 2px solid #0f3460;
+  border-radius: 8px;
+  padding: 10px 15px;
+  min-width: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.p1-stat {
+  border-color: #e94560;
+}
+
+.p1-stat .label {
+  color: #ff5270;
+  font-weight: bold;
+}
+
+.p2-stat {
+  border-color: #3498db;
+}
+
+.p2-stat .label {
+  color: #5dade2;
+  font-weight: bold;
+}
+
+.stat-box .label,
+.player-stat .label {
+  font-size: 13px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.stat-box .value,
+.player-stat .value {
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.input-src {
+  font-size: 14px !important;
+  color: #e0e0e0 !important;
+  margin-bottom: 8px;
+}
+
+/* Collectible Scoring UI */
+.score-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 8px;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #f39c12;
+}
+
+.score-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.score-item span {
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 0 5px rgba(243, 156, 18, 0.5);
+}
+
+.icon {
+  margin-right: 5px;
+  font-size: 14px;
+}
+
+/* Controls Panel (Bottom Left) */
+#controls-panel {
+  pointer-events: auto;
+  align-self: flex-start;
+  background: rgba(22, 33, 62, 0.85);
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid #0f3460;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+button {
+  background-color: #e94560;
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  width: 100%;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 0 #8b1e32;
+}
+
+button:active {
+  transform: translateY(4px);
+  box-shadow: none;
+}
+
+button:hover {
+  background-color: #ff5270;
+}
+
+.tutorial {
+  font-size: 14px;
+  color: #e0e0e0;
+  line-height: 1.6;
+}
+
+/* Central Toast Message */
+#toastMessage {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(233, 69, 96, 0.95);
+  padding: 20px 40px;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  border: 3px solid #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  opacity: 1;
+  transition: opacity 0.3s, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#survival-timer {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 0, 0, 0.8);
+  color: #fff;
+  font-size: 40px;
+  font-weight: 900;
+  padding: 10px 30px;
+  border-radius: 10px;
+  border: 4px solid #fff;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+  z-index: 1000;
+  animation: pulsePanic 0.8s infinite alternate;
+}
+
+@keyframes pulsePanic {
+  from { transform: translateX(-50%) scale(1); box-shadow: 0 0 10px red; }
+  to { transform: translateX(-50%) scale(1.1); box-shadow: 0 0 30px red; }
+}
+
+#survival-timer.hidden {
+  display: none;
+}
+
+#toastMessage.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -60%) scale(0.9);
+}
+
+/* Heboi CSS Animations for Canvas Canvas Wrap */
+.canvas-shake {
+  animation: hitShake 0.4s cubic-bezier(.36, .07, .19, .97) both;
+}
+
+@keyframes hitShake {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  20% {
+    transform: translate(-3px, 2px) rotate(-1deg);
+  }
+
+  40% {
+    transform: translate(3px, -2px) rotate(1deg);
+  }
+
+  60% {
+    transform: translate(-2px, -1px) rotate(0deg);
+  }
+
+  80% {
+    transform: translate(2px, 1px) rotate(1deg);
+  }
+
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+
+.canvas-spin-out {
+  animation: dramaticSpin 1.2s cubic-bezier(.55, .085, .68, .53) forwards;
+}
+
+@keyframes dramaticSpin {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+    filter: sepia(0%);
+  }
+
+  50% {
+    transform: scale(0.7) rotate(720deg);
+    opacity: 0.8;
+    filter: sepia(50%) hue-rotate(-50deg);
+  }
+
+  100% {
+    transform: scale(0) rotate(1440deg);
+    opacity: 0;
+    filter: sepia(100%) hue-rotate(-100deg);
+  }
+}
+
+/* --- Fight Mode UI Overlay --- */
+#fight-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle, rgba(26, 26, 46, 0.5) 0%, rgba(10, 10, 20, 0.95) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+#fight-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#fight-title {
+  color: #f39c12;
+  font-size: 32px;
+  text-shadow: 0 0 10px rgba(243, 156, 18, 0.8);
+  margin-bottom: 20px;
+  letter-spacing: 5px;
+  animation: pulseTitle 2s infinite alternate;
+}
+
+@keyframes pulseTitle {
+  from {
+    text-shadow: 0 0 10px rgba(243, 156, 18, 0.5);
+    transform: scale(1);
+  }
+
+  to {
+    text-shadow: 0 0 25px rgba(243, 156, 18, 1);
+    transform: scale(1.05);
+  }
+}
+
+#fight-countdown {
+  font-size: 80px;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 4px 4px 0 #e94560, -2px -2px 0 #3498db;
+  margin-bottom: 40px;
+}
+
+.fight-countdown-pop {
+  animation: countdownPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes countdownPop {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  80% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.fight-stats-container {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.fight-player-box {
+  background: rgba(22, 33, 62, 0.9);
+  border: 4px solid;
+  border-radius: 12px;
+  padding: 20px 40px;
+  text-align: center;
+  min-width: 250px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  transition: transform 0.1s;
+}
+
+.fight-player-box.mash-hit {
+  transform: scale(1.1) translateY(-10px);
+}
+
+.p1-box {
+  border-color: #e94560;
+  box-shadow: 0 0 20px rgba(233, 69, 96, 0.4);
+}
+
+.p2-box {
+  border-color: #3498db;
+  box-shadow: 0 0 20px rgba(52, 152, 219, 0.4);
+}
+
+.fight-player-box h3 {
+  margin: 0 0 10px 0;
+  font-size: 24px;
+}
+
+.p1-box h3 {
+  color: #ff5270;
+}
+
+.p2-box h3 {
+  color: #5dade2;
+}
+
+.mash-instruction {
+  font-size: 14px;
+  color: #aaa;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.fight-score {
+  font-size: 64px;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.fight-timer-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #0f3460;
+  border: 3px solid #f39c12;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  box-shadow: 0 0 20px rgba(243, 156, 18, 0.5);
+}
+
+.timer-label {
+  font-size: 14px;
+  color: #f39c12;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.timer-value {
+  font-size: 36px;
+  color: #fff;
+  font-weight: 900;
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Sinir Küpü: Heboi 3D Edition</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Load Three.js as global to avoid module issues locally -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+
+<body>
+
+  <!-- UI Layer overlaying Canvas -->
+  <div id="ui-layer">
+    <div id="survival-timer" class="hidden">KACIS: 15.0</div>
+    <div id="header">
+      <h1>SINIR KÜPÜ <span class="subtitle">(Heboi 3D Edition)</span></h1>
+    </div>
+
+    <div id="stats-panel">
+      <!-- Player 1 Stats -->
+      <div class="player-stat p1-stat">
+        <span class="label">P1 (Kırmızı)</span>
+        <span id="p1InputDisplay" class="value input-src">Klavye (WASD)</span>
+        <div class="score-container">
+          <div class="score-item">Skor: <span id="p1-score">0</span></div>
+          <div class="score-item"><span class="icon">🔶</span> Baklava: <span id="p1-baklava">0</span></div>
+          <div class="score-item"><span class="icon">🎺</span> Zurna: <span id="p1-zurna">0</span></div>
+        </div>
+      </div>
+
+      <!-- Global Game Stats -->
+      <div class="stat-box">
+        <span class="label">Bölüm</span>
+        <span id="levelDisplay" class="value">1</span>
+      </div>
+
+      <!-- Player 2 Stats -->
+      <div class="player-stat p2-stat">
+        <span class="label">P2 (Mavi)</span>
+        <span id="p2InputDisplay" class="value input-src">Klavye (Oklar)</span>
+        <div class="score-container">
+          <div class="score-item">Skor: <span id="p2-score">0</span></div>
+          <div class="score-item"><span class="icon">🔶</span> Baklava: <span id="p2-baklava">0</span></div>
+          <div class="score-item"><span class="icon">🎺</span> Zurna: <span id="p2-zurna">0</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="controls-panel">
+      <button onclick="resetLevel()" id="resetBtn">R - Yeniden Başla</button>
+      <div class="tutorial">
+        <b>P1:</b> WASD veya Gamepad 1<br>
+        <b>P2:</b> Ok Tuşları veya Gamepad 2<br>
+        <i>Hedef: İki küp de hedefe dik ulaşmalı!</i>
+      </div>
+    </div>
+
+    <!-- Fight Overlay (Hidden by Default) -->
+    <div id="fight-overlay" class="hidden">
+      <h2 id="fight-title">MOZAİK ARENASI</h2>
+      <div id="fight-countdown">FIGHT!</div>
+
+      <div class="fight-stats-container">
+        <div class="fight-player-box p1-box">
+          <h3>PLAYER 1</h3>
+          <div class="mash-instruction">MASH [SPACE] or [TRIANGLE]</div>
+          <div id="fight-p1-score" class="fight-score">0</div>
+        </div>
+
+        <div class="fight-timer-box">
+          <div class="timer-label">SÜRE</div>
+          <div id="fight-timer" class="timer-value">5.0</div>
+        </div>
+
+        <div class="fight-player-box p2-box">
+          <h3>PLAYER 2</h3>
+          <div class="mash-instruction">MASH [ENTER] or [TRIANGLE]</div>
+          <div id="fight-p2-score" class="fight-score">0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Central Toast Messages -->
+    <div id="toastMessage" class="hidden"></div>
+  </div>
+
+  <!-- Game Container where Three.js injects -->
+  <div id="gameContainer"></div>
+
+  <!-- Local Textures as Base64 to bypass CORS on file:// -->
+  <script src="textures.js"></script>
+  <script src="game.js"></script>
+</body>
+
+</html>
